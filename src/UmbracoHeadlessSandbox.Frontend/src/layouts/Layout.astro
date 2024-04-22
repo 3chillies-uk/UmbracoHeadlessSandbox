@@ -1,0 +1,80 @@
+---
+import "@styles/main.css";
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import Header from "@components/header.astro";
+import Footer from "@components/footer.astro";
+import { type IApiContentResponseModel } from "@scripts/api";
+import { GetContentItemByPath, GetNavigation } from "@scripts/clients/UmbracoClient";
+
+interface Props {
+	page: IApiContentResponseModel | null | undefined;	
+}
+
+const { page } = Astro.props;
+
+const homepage = await GetContentItemByPath("/");
+const navigation = await GetNavigation();
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+
+		{ page ? (<title>{page.properties?.title ?? page.name}</title>) : null }
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="keywords" content="UmbracoHeadlessSandbox" />
+		<meta name="author" content="UmbracoHeadlessSandbox" />
+		<meta name="copyright" content="UmbracoHeadlessSandbox" />
+		<meta name="theme-color" content="#61CE70" />
+		<meta name="description" content="a headless sandbox for Umbraco, Astro, Tailwind and Typescript " />
+		<meta name="robots" content="max-image-preview:large" />
+		<link rel="canonical" href="https://localhost:4321/" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:site_name" content="Umbraco Headless" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Umbraco Headless " />
+		<meta property="og:description" content="" />
+		<meta property="og:url" content="https://localhost:4321/" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Umbraco Headless " />
+		<meta name="twitter:description" content="" />
+
+		<link rel="publisher" href="https://localhost:4321" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+
+		<!-- 		
+		<script async src="https://www.googletagmanager.com/gtag/js?id=XXXXXX"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+			gtag("config", "XXXXX");
+		</script> -->
+
+		<GoogleFontsOptimizer
+			url="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+		/>
+
+	</head>
+	<body>
+		<a href="#main" class="skip-to-main-content-link">Skip to main content</a>
+
+		<Header homepage={homepage} pages={navigation}/>
+
+		<main id="main">
+			<slot />
+		</main>
+
+		<Footer homepage={homepage} />
+
+		<script>
+			import dynamicImports from "@scripts/dynamicImports";
+			dynamicImports();
+		</script>
+	</body>
+</html>

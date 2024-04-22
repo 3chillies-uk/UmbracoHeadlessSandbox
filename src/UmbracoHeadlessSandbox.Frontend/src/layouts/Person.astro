@@ -1,0 +1,22 @@
+---
+import Layout from "@layouts/Layout.astro";
+import BlockList from "@components/blocklist.astro";
+import PersonItem from "@components/person.astro";
+import { type PersonContentModel } from "@scripts/api";
+import Banner from "@components/banner.astro";
+
+interface Props {
+	page: PersonContentModel | null | undefined;
+}
+
+const { page } = Astro.props;
+---
+
+<Layout page={page}>
+	<Banner items={page?.properties?.banners} />
+
+	<section class="container mt-9 mb-12">
+		<PersonItem item={page} />
+		<BlockList items={page?.properties?.content?.items} />
+	</section>
+</Layout>

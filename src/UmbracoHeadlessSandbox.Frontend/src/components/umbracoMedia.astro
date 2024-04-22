@@ -1,0 +1,43 @@
+---
+import { Picture } from "astro:assets";
+import { type IApiMediaWithCropsModel } from "@scripts/api/models";
+
+interface Props {
+	items?: Array<IApiMediaWithCropsModel> | null | undefined;
+	item?: IApiMediaWithCropsModel | null | undefined;
+	lazyLoad?: boolean;
+	cssClass?: string;
+	urlSuffix?: string;
+}
+
+const { items, item, lazyLoad = "eager", cssClass = "", urlSuffix = "" } = Astro.props;
+
+let media = items || [item];
+---
+
+{
+	media?.map((item: IApiMediaWithCropsModel) =>
+		item?.mediaType === "Image" || item?.mediaType === "umbracoMediaVectorGraphics" ? (
+			<Picture
+				src={process.env.IMAGE_BASE_URL + item?.url + urlSuffix}
+				alt={(item?.properties?.altText as string) ?? ""}
+				formats={["webp"]}
+				width={item?.width}
+				height={item?.height}
+				title={(item?.properties?.altText as string) ?? ""}
+				loading={lazyLoad ? "lazy" : "eager"}
+				class={cssClass}
+				inferSize={true}
+			/>		
+		) : item?.mediaType === "umbracoMediaVideo" ? (
+			<video width={item?.width} height={item?.height} controls autoplay muted>
+				<source src={process.env.IMAGE_BASE_URL + item?.url + urlSuffix} type="video/mp4" />
+				Your browser does not support the video tag.
+			</video>		
+		) : (
+			<a href={process.env.IMAGE_BASE_URL + item?.url + urlSuffix} target="_blank" rel="noopener" class={cssClass}>
+				<slot />
+			</a>
+		)
+	)
+}

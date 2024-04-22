@@ -1,0 +1,43 @@
+---
+import type { ApiBlockItemModel } from "@scripts/api/models";
+import {
+	type PromotionalImageElementModel,
+	type TextWithImageElementModel,
+	type TabbedContentElementModel,
+	type AccordionElementModel,
+	type CarouselElementModel,
+	type TwoUpElementModel,
+	type SitemapElementModel,
+	type RichTextElementModel,
+} from "@scripts/api";
+
+import TextWithImage from "@components/textWithImage.astro";
+import PromotionalImage from "@components/promotionalImage.astro";
+import TabbedContent from "@components/tabbedcontent.astro";
+import Accordion from "@components/accordion.astro";
+import Carousel from "@components/carousel.astro";
+import TwoUp from "@components/twoUp.astro";
+import Sitemap from "@components/sitemap.astro";
+import RichText from "@components/richText.astro";
+
+interface Props {
+	item?: ApiBlockItemModel;
+}
+
+const { item } = Astro.props;
+---
+
+<div class="w-full">
+	{item?.content?.contentType === "textWithImage" && <TextWithImage item={item.content as TextWithImageElementModel} />}
+	{
+		item?.content?.contentType === "promotionalImage" && (
+			<PromotionalImage item={item.content as PromotionalImageElementModel} />
+		)
+	}
+	{item?.content?.contentType === "tabbedContent" && <TabbedContent item={item.content as TabbedContentElementModel} />}
+	{item?.content?.contentType === "accordion" && <Accordion item={item.content as AccordionElementModel} />}
+	{item?.content?.contentType === "carousel" && <Carousel item={item.content as CarouselElementModel} />}
+	{item?.content?.contentType === "twoUp" && <TwoUp item={item.content as TwoUpElementModel} />}
+	{item?.content?.contentType === "sitemap" && <Sitemap item={item.content as SitemapElementModel} />}
+	{item?.content?.contentType === "richText" && <RichText item={item.content as RichTextElementModel} />}
+</div>

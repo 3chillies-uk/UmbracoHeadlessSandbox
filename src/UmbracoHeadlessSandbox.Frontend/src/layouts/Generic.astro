@@ -1,0 +1,21 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Banner from "@components/banner.astro";
+import BlockList from "@components/blocklist.astro";
+import { type IApiContentResponseModel } from "@scripts/api";
+
+interface Props {
+	page: IApiContentResponseModel | null | undefined;
+}
+
+const { page } = Astro.props;
+---
+
+<Layout page={page}>
+	
+	<Banner items={page?.properties?.banners} />
+
+	<section class="container mt-9 mb-12">
+		<BlockList items={page?.properties?.content?.items} />
+	</section>
+</Layout>

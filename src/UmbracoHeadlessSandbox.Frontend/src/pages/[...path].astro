@@ -1,0 +1,24 @@
+---
+import Generic from "@layouts/Generic.astro";
+import Person from "@layouts/Person.astro";
+import People from "@layouts/People.astro";
+
+import { GetAllRoutes, GetContentItemByPath } from "@scripts/clients/UmbracoClient";
+
+export async function getStaticPaths() {
+	const pages = await GetAllRoutes();
+	if (pages?.items === undefined) return [{ params: { id: "" } }];
+	return pages?.items?.map((page) => ({
+		params: { path: page?.route?.path },
+		props: page?.properties,
+	}));
+}
+
+export const prerender = import.meta.env.DISABLE_SSR as Boolean;
+
+const page = await GetContentItemByPath(Astro.url.pathname);
+---
+
+{page?.contentType === "people" && <People page={page} />}
+{page?.contentType === "person" && <Person page={page} />}
+{page?.contentType === "generic" && <Generic page={page} />}

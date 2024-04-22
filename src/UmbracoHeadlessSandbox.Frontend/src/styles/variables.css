@@ -1,0 +1,22 @@
+@layer base {
+    :root {
+      --text-color: theme(colors.black);
+      --font-size-xs: 0.75rem;
+      --font-size-sm: 0.875rem;      
+      --font-size-md: 1rem;
+      --font-size-lg: 1.125rem;
+      --font-size-xl: 1.325rem;
+      --font-size-2xl: 2.0rem;
+      --gutter-size: 1.25rem;   
+      --line-height: .625rem; 
+     
+      @screen md {     
+        --font-size-xl: 1.5rem;
+      }
+  
+      @screen xl {
+        --gutter-size: 15px;     
+      }
+    }
+  }
+  

@@ -1,0 +1,17 @@
+---
+import type { ApiBlockItemModel } from "@scripts/api/models";
+import BlockListItem from "@components/blocklistitem.astro";
+
+interface Props {
+	items?: Array<ApiBlockItemModel>;
+}
+
+const { items } = Astro.props;
+---
+{
+	items?.map((item: ApiBlockItemModel) => (
+		<div class="w-full">
+			 <BlockListItem item={item} />
+		</div>
+	))
+}

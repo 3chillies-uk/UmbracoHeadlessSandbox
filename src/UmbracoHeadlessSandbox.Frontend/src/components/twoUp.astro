@@ -1,0 +1,18 @@
+---
+import { type TextColumnElementModel, type TwoUpElementModel } from "@scripts/api";
+import Heading from "@components/heading.astro";
+import TextColumn from "@components/textColumn.astro";
+
+interface Props {
+	item?: TwoUpElementModel;
+}
+
+const { item } = Astro.props;
+---
+
+<section class="py-6">
+	<Heading title={item?.properties?.title} />
+	<div class="twoUp flex flex-col md:flex-row mt-8">		
+		{item?.properties?.columns?.items?.map((data, i) => <TextColumn item={data?.content as TextColumnElementModel} />)}		
+	</div>
+</section>

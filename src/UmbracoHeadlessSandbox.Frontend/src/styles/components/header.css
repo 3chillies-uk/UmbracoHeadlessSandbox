@@ -1,0 +1,70 @@
+@layer components {
+	header {
+		@apply bg-white;
+	}
+
+	nav.primary-navigation {
+		@apply flex-wrap justify-center py-3 font-heading md:py-4;
+				
+		&.open {
+			@apply fixed z-[999999] w-5/12 top-0 left-0 bg-white h-dvh;
+
+			ul {
+				@apply gap-4 flex flex-col py-6 px-5;	
+
+			}
+		}
+
+		ul {
+			@apply flex flex-row flex-wrap uppercase gap-[30px];
+
+			> li {
+				> a {
+					@apply text-charcoal no-underline tracking-[0.140em] text-sm md:text-[0.875rem] 
+ 				
+				}
+			}
+
+			> li {
+				> a.active {
+					@apply text-umbracoblue font-bold;
+				} 			
+			}
+		}
+	}
+
+	ul.utilities {
+		* > a {
+			@apply no-underline font-light text-charcoal;
+		}
+
+		li:first-child a {
+			@apply font-normal;
+		}
+
+		li:first-child:after {
+			@apply content-[""] border-r border-charcoal h-4 m-2 break-words;
+
+			a {
+				@apply hover:text-umbracoblue;
+			}
+		}
+
+		@screen md {
+			li:first-child a {
+				@apply font-bold text-charcoal text-[14px];
+			}
+
+			li:first-child:after {
+				@apply content-[""] border-none;
+			}
+		}
+	}
+
+	.searchbox {
+		@apply border-b border-ceramic;
+		input {
+			@apply text-[14px] font-heading text-charcoal p-[10px] cursor-pointer rounded outline-none placeholder-charcoal;
+		}
+	}
+}

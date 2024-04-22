@@ -1,0 +1,14 @@
+---
+import { type TextColumnElementModel } from "@scripts/api";
+
+interface Props {
+	item: TextColumnElementModel;
+}
+
+const { item } = Astro.props;
+---
+
+<div class="md:w-1/2 item richText">
+	{item?.properties?.title ? <h2 class="font-heading text-xl">{item?.properties?.title}</h2> : null}
+	{item?.properties?.text ? <p set:html={item?.properties?.text?.markup} /> : null}
+</div>

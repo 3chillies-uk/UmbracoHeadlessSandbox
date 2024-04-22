@@ -1,0 +1,68 @@
+---
+import Heading from "@components/heading.astro";
+import { type AccordionElementModel, type AccordionItemElementModel, type ApiBlockItemModel } from "@scripts/api";
+
+interface Props {
+	item?: AccordionElementModel;
+}
+
+const { item } = Astro.props;
+---
+
+<section class="py-6">
+	<Heading title={item?.properties?.title} />
+
+	<div data-js="Accordion">
+		<div id="accordionGroup" class="accordion">
+			{
+				item?.properties?.tabs?.items?.map((data: ApiBlockItemModel, i) => (
+					<>
+						<h3>
+							<button
+								id={`accordion-` + i + `-` + data?.content?.id}
+								type="button"
+								aria-expanded="false"
+								class="accordion-trigger"
+								aria-controls={`accordion-content-` + i + `-` + data?.content?.id}
+							>
+								<span class="accordion-title">
+									<span class="accordion-plus inline-flex">
+										<svg
+											aria-hidden="true"
+											viewBox="0 0 448 512"
+											fill="currentColor"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+										</svg>
+									</span>
+									<span class="accordion-minus hidden">
+										<svg
+											aria-hidden="true"
+											viewBox="0 0 448 512"
+											fill="currentColor"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+										</svg>
+									</span>
+									<span>{data?.content?.properties?.title}</span>
+									<span class="accordion-icon" />
+								</span>
+							</button>
+						</h3>
+						<div
+							id={`accordion-content-` + i + `-` + data?.content?.id}
+							role="region"
+							aria-labelledby={`accordion-` + i + `-` + data?.content?.id}
+							class="accordion-panel close richText"
+						>
+							<h4 class="font-bold text-md">{data?.content?.properties?.title}</h4>
+							<p  set:html={(data?.content as AccordionItemElementModel)?.properties?.text?.markup} />
+						</div>
+					</>
+				))
+			}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,107 @@
+---
+import UmbracoMedia from "@components/umbracoMedia.astro";
+import { type PersonContentModel } from "@scripts/api";
+
+interface Props {
+	item: PersonContentModel | null | undefined;
+}
+
+const { item } = Astro.props;
+---
+
+<section>
+	<div class="flex flex-row flex-wrap">
+		{
+			item?.properties?.image ? (
+				<div class="w-full md:w-1/3">
+					<UmbracoMedia
+						items={item?.properties?.image}
+						lazyLoad={true}
+						cssClass="w-full h-auto"
+						urlSuffix="?width=300&height=400&mode=crop"
+					/>
+				</div>
+			) : null
+		}
+
+		<div class="w-full md:w-2/3 py-2 md:pl-8">
+			<div class="w-full">
+				<h3 class="text-xl uppercase font-heading">{item?.properties?.title ?? item?.name}</h3>
+
+				{
+					item?.properties?.jobTitle ? (
+						<p class="text-umbracoorange mb-2 uppercase text-md font-heading">{item?.properties?.jobTitle}</p>
+					) : null
+				}
+
+				<ul class="text-xs">
+					{
+						item?.properties?.phoneNumber ? (
+							<li>
+								<a href={`tel:` + item?.properties?.phoneNumber} class="no-underline text-black font-bold">
+									{item?.properties?.phoneNumber}
+								</a>
+							</li>
+						) : null
+					}
+					{
+						item?.properties?.emailAddress ? (
+							<li>
+								<a
+									href={`mailto:` + item?.properties?.emailAddress}
+									class="no-underline text-black lowercase  font-bold"
+								>
+									{item?.properties?.emailAddress}
+								</a>
+							</li>
+						) : null
+					}
+				</ul>
+
+				{
+					item?.properties?.cv ? (
+						<div class="my-4">
+							<UmbracoMedia items={item?.properties?.cV} cssClass="linkButton">
+								<Fragment> Download Full CV </Fragment>
+							</UmbracoMedia>
+						</div>
+					) : null
+				}
+			</div>
+			<div class="mt-10">
+				<div class="flex flex-row flex-wrap gap-4 md:gap-0">
+					{
+						item?.properties?.qualifications ? (
+							<div class="w-full md:w-1/2">
+								<h3 class="text-lg uppercase font-heading text-umbracoorange">Qualifications</h3>
+
+								<ul class="text-sm">
+									{item?.properties?.qualifications?.map((item) => (
+										<li>{item}</li>
+									))}
+								</ul>
+							</div>
+						) : null
+					}
+
+					{
+						item?.properties?.specialisms ? (
+							<div class="w-full md:w-1/2">
+								<h3 class="text-lg uppercase font-heading text-umbracoorange">Specialisms</h3>
+
+								<ul class="text-sm">
+									{item?.properties?.specialisms?.map((item) => (
+										<li>{item}</li>
+									))}
+								</ul>
+							</div>
+						) : null
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="focuses">
+		{item?.properties?.areas?.map((item) => <span>{item}</span>)}
+	</div>
+</section>

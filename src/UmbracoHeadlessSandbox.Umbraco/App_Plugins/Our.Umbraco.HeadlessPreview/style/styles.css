@@ -1,0 +1,20 @@
+﻿#headlessPreviewDashboard .configuration-dashboard-notice {
+    width: 705px;
+    margin-left: 5px;
+}
+
+#headlessPreviewDashboard .configuration-dashboard-property {
+	padding: 10px 5px;
+}
+
+#headlessPreviewDashboard .configuration-dashboard-property label {
+	font-weight: 700;
+}
+
+#headlessPreviewDashboard .configuration-dashboard-property input {
+	width: 750px;
+}
+
+#headlessPreviewDashboard .configuration-dashboard-property select {
+	width: 750px;
+}

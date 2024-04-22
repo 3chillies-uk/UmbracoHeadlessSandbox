@@ -1,0 +1,22 @@
+@inherits UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListModel>
+@inject IViewComponentSelector _selector;
+@if (Model == null || !Model.Any()) { return; }
+
+@foreach (var block in Model)
+{
+    if (block?.ContentUdi == null) { continue; }
+
+    if (_selector.SelectComponent(block.Content.ContentType.Alias) is not null)
+    {
+        switch (block.Content.ContentType.Alias)
+        {          
+            default:
+                @await Component.InvokeAsync(block.Content.ContentType.Alias, block.Content)
+                break;
+        }
+    }
+    else
+    {
+        @await Html.PartialAsync("components/" + block.Content.ContentType.Alias + "/default", block.Content)
+    }
+}

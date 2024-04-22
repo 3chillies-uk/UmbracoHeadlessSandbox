@@ -1,0 +1,50 @@
+@layer components {
+	.tabbedContent {
+		@apply flex flex-row -mt-7;
+
+		.tab-container {
+			@apply hidden lg:block w-1/4 overflow-hidden relative;
+
+			.tab {
+				@apply font-heading w-full text-charcoal p-5 cursor-pointer relative text-left text-sm font-semibold;
+
+				&.active {
+					@apply text-umbracoblue border border-ceramic border-r-0;
+
+					&::before {
+						@apply content-[""] absolute block border border-ceramic top-0 h-[999em] w-0 right-0 box-border -translate-y-full opacity-50;
+					}
+
+					&::after {
+						@apply content-[""] absolute block border border-ceramic top-full h-[999em] w-0 right-0 box-border opacity-50;
+					}
+				}
+			}
+		}
+
+		.tab-panel-container {
+		
+			@apply w-full lg:w-3/4 flex-1;
+			
+			.tab-small {
+				@apply lg:hidden font-heading w-full text-charcoal px-5 py-2 cursor-pointer relative border border-ceramic  text-left text-sm font-semibold;
+
+				&.active {
+					@apply text-umbracoblue;
+				}
+
+				~ .tab-small {
+					@apply border-t-0;
+				}
+			}
+
+			.tab-panel {
+				@apply hidden lg:mr-4 border-l border-r border-b border-ceramic lg:border lg:border-l-0 p-5 lg:h-full;
+
+				&.active {
+					@apply block;
+				}				
+			}
+		}
+	}
+}

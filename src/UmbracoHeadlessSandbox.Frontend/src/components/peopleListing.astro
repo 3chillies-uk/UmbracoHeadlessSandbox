@@ -1,0 +1,16 @@
+---
+import { type PagedIApiContentResponseModel, type PersonContentModel } from "@scripts/api";
+import PersonListingItem from "@components/personListingItem.astro";
+
+interface Props {
+	pages: PagedIApiContentResponseModel | null | undefined;
+}
+
+const { pages } = Astro.props;
+---
+
+<section class="container mt-9 mb-12">
+	<div class="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+		{pages?.items?.map((item: PersonContentModel) => <PersonListingItem item={item} />)}
+	</div>
+</section>

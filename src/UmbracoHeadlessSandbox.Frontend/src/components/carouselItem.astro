@@ -1,0 +1,14 @@
+---
+import { type CarouselItemElementModel } from "@scripts/api";
+import UmbracoMedia from "@components/umbracoMedia.astro";
+
+interface Props {
+	item: CarouselItemElementModel;
+}
+
+const { item } = Astro.props;
+---
+
+<div class="swiper-slide">
+	<UmbracoMedia items={item?.properties?.image} />
+</div>

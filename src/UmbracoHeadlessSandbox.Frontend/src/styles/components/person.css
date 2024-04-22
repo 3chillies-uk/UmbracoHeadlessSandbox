@@ -1,0 +1,18 @@
+@layer components { 
+
+    .focuses { 
+
+        @apply text-black text-sm mt-4 font-semibold;
+
+        span { 
+            &::after { 
+                @apply content-["|"] px-2;
+            }
+           
+            &:last-child::after { 
+                @apply content-[];
+            }
+        }
+    }
+
+}

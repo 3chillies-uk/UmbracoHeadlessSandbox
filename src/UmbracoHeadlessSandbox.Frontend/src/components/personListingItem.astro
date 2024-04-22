@@ -1,0 +1,54 @@
+---
+import { type PersonContentModel } from "@scripts/api";
+import UmbracoMedia from "@components/umbracoMedia.astro";
+
+interface Props {
+	item: PersonContentModel;
+}
+
+const { item } = Astro.props;
+---
+
+<div>
+	<div class="mb-2">
+		<a href={item?.route?.path}>
+			{
+				item?.properties?.image ? (
+					<UmbracoMedia
+						items={item?.properties?.image}
+						lazyLoad={true}
+						cssClass="w-full h-auto"
+						urlSuffix="?width=268&height=358&mode=crop"
+					/>
+				) : (
+					<div class="w-[268px] h-[358px] bg-ceramic" />
+				)
+			}
+		</a>
+	</div>
+
+	<h3 class="font-bold text-lg uppercase">{item?.properties?.title}</h3>
+
+	<p class="text-umbracoorange font-bold mb-2 uppercase text-sm">{item?.properties?.jobTitle}</p>
+
+	<ul class="text-xs">
+		{
+			item?.properties?.phoneNumber ? (
+				<li>
+					<a href={`tel:` + item?.properties?.phoneNumber} class="no-underline text-black">
+						{item?.properties?.phoneNumber}
+					</a>
+				</li>
+			) : null
+		}
+		{
+			item?.properties?.emailAddress ? (
+				<li>
+					<a href={`mailto:` + item?.properties?.emailAddress} class="no-underline text-black lowercase">
+						{item?.properties?.emailAddress}
+					</a>
+				</li>
+			) : null
+		}
+	</ul>
+</div>

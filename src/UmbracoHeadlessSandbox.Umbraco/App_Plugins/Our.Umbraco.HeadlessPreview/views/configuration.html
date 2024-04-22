@@ -1,0 +1,48 @@
+﻿<div ng-app ng-controller="HeadlessPreview.ConfigurationController as vm" id="headlessPreviewDashboard">
+	<umb-box>
+		<umb-box-content>
+            <div class="configuration-dashboard">
+
+                <umb-load-indicator ng-if="vm.loadingConfiguration || vm.buttonState === 'busy'">
+                </umb-load-indicator>
+
+                <div class="configuration-dashboard-content" ng-if="!vm.loadingConfiguration">
+
+                    <div ng-if="vm.configuration.configuredFromSettingsFile" class="alert-info umb-app-header umb-notifications__notification configuration-dashboard-notice">
+                        <strong>The settings are loaded from the appsettings.json file.</strong>&nbsp;<span>Go to the file to change the values</span>
+                    </div>
+
+                    <div class="configuration-dashboard-property">
+                        <strong>Placeholders</strong>
+                        <ul>
+                            <li><span>{hostname}</span> - The hostname added on nearest ancestor node or self with the right culture in Umbraco. If multiple hostname has same culture it takes the first.</li>
+                            <li><span>{slug}</span> - The relative path of the page being previewed.</li>
+                        </ul>
+                    </div>
+
+                    <div class="configuration-dashboard-property">
+                        <strong>Template Url Examples</strong>
+                        <ul>
+                            <li>https://mysite.com/api/preview?slug={slug}&secret=mySecret</li>
+                            <li>{hostname}/api/preview?slug={slug}&secret=mySecret</li>
+                            <li>https://mysite.com/{slug}?preview=true</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="configuration-dashboard-property">
+                        <label for="template-url">Template URL</label><br />
+                        <input type="text" id="template-url" class="input-field" placeholder="Example: https://mysite.com/api/preview?slug={slug}&secret=mySecret" ng-model="vm.configuration.templateUrl" ng-disabled="vm.buttonState === 'busy' || vm.configuration.configuredFromSettingsFile" />
+                    </div>
+
+                    <umb-button ng-if="!vm.configuration.configuredFromSettingsFile" action="vm.saveConfiguration()"
+                                type="button"
+                                button-style="success"
+                                state="vm.configState"
+                                label="Save configuration"
+                                disabled="vm.buttonState === 'busy' || vm.configuration.configuredFromSettingsFile || (!vm.configuration.templateUrl)">
+                    </umb-button>
+                </div>
+            </div>
+		</umb-box-content>
+	</umb-box>
+</div>

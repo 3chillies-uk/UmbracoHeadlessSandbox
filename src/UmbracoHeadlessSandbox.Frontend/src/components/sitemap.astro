@@ -1,0 +1,16 @@
+---
+import { type SitemapElementModel } from "@scripts/api";
+import Heading from "@components/heading.astro";
+import SitemapBranch from "@components/sitemapBranch.astro";
+
+interface Props {
+	item?: SitemapElementModel;
+}
+
+const { item } = Astro.props;
+---
+
+<section class="py-6">
+	<Heading title={item?.properties?.title} />
+    <SitemapBranch path="/" />
+</section>

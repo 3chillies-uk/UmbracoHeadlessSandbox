@@ -1,0 +1,27 @@
+---
+import Layout from "@layouts/Layout.astro";
+import BlockList from "@components/blocklist.astro";
+import { GetContentItemByPath } from "@scripts/clients/UmbracoClient";
+import Banner from "@components/banner.astro";
+
+export const prerender = false;
+
+const page = await GetContentItemByPath(Astro.url.pathname);
+---
+
+<Layout page={page}>
+	
+	<Banner items={page?.properties?.banners} />
+
+	{
+		page == null && (
+			<div class="container mt-9">
+				<h1>The website delivery API is currently unavailable, please try again later.</h1>
+			</div>
+		)
+	}
+	
+	<section class="container mt-9 mb-12">
+		<BlockList items={page?.properties?.content?.items} />
+	</section>
+</Layout>

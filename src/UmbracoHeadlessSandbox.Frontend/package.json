@@ -1,0 +1,54 @@
+{
+	"name": "umbraco-headless-sandbox",
+	"author": "Gareth Wright",
+	"type": "module",
+	"version": "1.0.0",
+	"homepage": "https://github.com/3chillies-uk/UmbracoHeadlessSandbox",
+	"description": "",
+	"keywords": [
+		"typescript",
+		"astro",
+		"tailwindcss",
+		"vite"
+	],
+	"engines": {
+		"node": "20.x",
+		"npm": "PLEASE USE YARN",
+		"yarn": ">=1.x"
+	},
+	"private": true,
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/3chillies-uk/UmbracoHeadlessSandbox"
+	},
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev --host",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"generate": "openapi-ts"
+	},
+	"dependencies": {
+		"@astrojs/check": "^0.5.10",
+		"@astrojs/sitemap": "^3.1.1",
+		"@astrojs/tailwind": "^5.1.0",
+		"@astrojs/vercel": "^7.4.0",
+		"@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+		"astro": "^4.5.9",
+		"astro-favicons": "^2.0.2",
+		"astro-google-fonts-optimizer": "^0.2.2",
+		"astro-robots-txt": "^1.0.0",
+		"dotenv": "^16.4.5",
+		"postcss": "^8.4.35",
+		"postcss-nesting": "^12.1.0",
+		"swiper": "^11.0.7",
+		"tailwindcss": "^3.4.1",
+		"typescript": "^5.4.3"
+	},
+	"devDependencies": {
+		"@hey-api/openapi-ts": "^0.34.1",
+		"vite-plugin-mkcert": "^1.17.5"
+	}
+}

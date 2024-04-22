@@ -1,0 +1,24 @@
+---
+import { type IApiMediaWithCropsModel } from "@scripts/api";
+import UmbracoMedia from "@components/umbracoMedia.astro";
+
+interface Props {
+	items?: Array<IApiMediaWithCropsModel> | null | undefined;
+}
+
+const { items } = Astro.props;
+---
+
+<section>
+	<div class="swiper swiper-banner" data-js="Banner">
+		<div class="swiper-wrapper">
+			{
+				items?.map((item) => (
+					<div class="swiper-slide">
+						<UmbracoMedia item={item} lazyLoad={false} cssClass="w-full" urlSuffix="?width=2832&height=600" />
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

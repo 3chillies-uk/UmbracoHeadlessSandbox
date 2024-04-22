@@ -1,0 +1,35 @@
+---
+import type { HomepageContentModel } from "@scripts/api/models";
+import UmbracoLink from "@components/umbracoLink.astro";
+
+interface Props {
+	homepage?: HomepageContentModel;
+}
+
+const { homepage } = Astro.props;
+
+---
+<footer>
+	<div class="container flex py-0 flex-col md:flex-row w-full">
+		<h2 class="flex justify-center text-center md:justify-start md:w-1/2 order-2 md:order-1">
+			{ 
+				(homepage?.properties?.copyright) 
+				? <span set:html={homepage?.properties?.copyright} />
+				: <></>
+			}			
+		</h2>
+		<ul class="flex justify-center md:justify-end md:w-1/2 order-1 md:order-2 mb-2 md:mb-0 footer-links">
+			{ 
+				homepage?.properties?.footerLinks?.map((data) => 
+					<li>
+						<UmbracoLink item={data}>
+						<Fragment>
+							{data?.title}
+						</Fragment>
+						</UmbracoLink>
+					</li>
+				)
+			}		
+		</ul>
+	</div>
+</footer>

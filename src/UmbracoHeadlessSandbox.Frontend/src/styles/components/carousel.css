@@ -1,0 +1,5 @@
+@layer components {
+	.swiper-carousel {
+		@apply !px-[50px] md:!px-[80px];
+	}
+}

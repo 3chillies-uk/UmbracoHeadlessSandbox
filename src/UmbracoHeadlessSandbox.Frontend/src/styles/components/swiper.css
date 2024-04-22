@@ -1,0 +1,10 @@
+.swiper {
+    @apply w-full;     
+  }  
+
+  .swiper-button-prev,
+  .swiper-button-next {    
+    &::after {
+      @apply !text-charcoal !text-[22px] !font-bold rotate-0;
+    }
+  }

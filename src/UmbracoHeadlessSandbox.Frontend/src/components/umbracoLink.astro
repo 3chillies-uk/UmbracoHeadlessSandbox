@@ -1,0 +1,40 @@
+---
+import { type ApiLinkModel } from "@scripts/api/models";
+
+interface Props {
+	items?: Array<ApiLinkModel> | null | undefined;
+	item?: ApiLinkModel | null | undefined;
+	cssClass?:string;
+}
+
+const { items, item, cssClass = null } = Astro.props;
+
+// USAGE:
+// <UmbracoLink items={item?.properties?.link}>
+// 		<Fragment>
+// 			<UmbracoMedia items={item?.properties?.image} />
+// 		</Fragment>
+// 	</UmbracoLink>
+
+let links = items || [item];
+---
+
+{
+	links?.map((item: ApiLinkModel) =>
+		item?.linkType === "Content" ? (
+			<a href={item.route?.path} class={cssClass}>
+				<slot />
+			</a>
+		) : item?.linkType === "External" ? (
+			<a href={item.url} target={item.target} rel={item.target === "_blank" ? "noopener" : ""}  class={cssClass}>
+				<slot />
+			</a>
+		) : item?.linkType === "Media" ? (			
+			<a href={item.url} target={item.target} rel={item.target === "_blank" ? "noopener" : ""}  class={cssClass}>
+				<slot />
+			</a>
+		) : (
+			<slot />
+		)
+	)
+}

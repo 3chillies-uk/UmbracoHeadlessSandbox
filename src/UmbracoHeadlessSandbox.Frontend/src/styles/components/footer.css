@@ -1,0 +1,19 @@
+@layer components {
+	footer {
+		@apply bg-black py-5 w-full font-footer text-white text-xs;
+
+		h2 {
+			@apply text-xs text-ceramic font-footer;
+		}
+	}
+
+	.footer-links {
+		* > a {
+			@apply text-white;
+		}
+
+		li + li::before {
+			@apply content-["|"] pr-1 pl-1;
+		}
+	}
+}

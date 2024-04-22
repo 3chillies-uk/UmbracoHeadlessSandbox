@@ -1,0 +1,12 @@
+@layer components {
+	.twoUp {
+		.item {
+			@apply mr-4;
+
+			:last-child {
+				@apply mr-0;
+			}		
+			
+		}
+	}
+}

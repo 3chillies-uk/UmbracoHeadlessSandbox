@@ -1,0 +1,19 @@
+---
+import { type PromotionalImageElementModel } from "@scripts/api";
+import UmbracoMedia from "@components/umbracoMedia.astro";
+import UmbracoLink from "@components/umbracoLink.astro";
+
+interface Props {
+	item?: PromotionalImageElementModel;
+}
+
+const { item } = Astro.props;
+---
+
+<section class="py-6">
+	<UmbracoLink items={item?.properties?.link}>
+		<Fragment >
+			<UmbracoMedia items={item?.properties?.image} urlSuffix="?width=1024&height=300" />
+		</Fragment>
+	</UmbracoLink>
+</section>

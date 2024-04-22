@@ -1,0 +1,103 @@
+@layer components {
+	.accordion {
+		@apply m-0 p-0 w-full;
+
+		.accordion > * + * {
+			@apply border-t border-sky;
+		}
+
+		h3 {
+			@apply m-0 p-0 bg-sky border border-black border-opacity-[.02] mb-1 font-heading text-md;
+
+			button {
+				@apply border-none;
+			}
+
+			.accordion-trigger {
+				@apply bg-none text-charcoal block m-0 py-1 px-2 relative text-left w-full;
+
+				&[aria-expanded="true"] {
+					@apply text-umbracoblue;
+					@apply transition-all duration-300 ease-in-out;
+				}
+
+				&[aria-expanded="true"] .accordion-icon {
+					@apply transform -translate-y-[50%] rotate-[45deg] text-umbracoblue;
+					@apply transition-all duration-300 ease-in-out;
+				}
+
+				.accordion-icon {
+					@apply hidden lg:inline-block h-2 pointer-events-none absolute right-8 top-1/2 transform -translate-y-[60%] -rotate-[45deg] w-2;
+					border-width: 0 2px 2px 0;
+				}
+
+				&[aria-expanded="false"] .accordion-icon {
+					@apply transition-all duration-300 ease-in-out;
+				}
+
+				.accordion-title {
+					@apply block pointer-events-none border-transparent border-2 border-solid rounded p-1 outline-none;
+				}
+
+				.accordion-plus {
+					@apply mr-2;
+					svg {
+						@apply text-ash w-3 h-3;
+					}
+				}
+
+				.accordion-minus {
+					@apply mr-2;
+					svg {
+						@apply text-umbracoblue w-3 h-3;
+					}
+				}
+			}
+
+			.accordion button::-moz-focus-inner {
+				@apply border-none;
+			}
+		}
+
+		.accordion-panel {
+			@apply grid m-0 py-4 px-4 border border-[#eeeeee] bg-sky font-body text-sm mb-2 text-charcoal h-auto;			
+			@apply origin-top transition-transform duration-[0.3s] ease-in-out scale-y-0;
+
+			&.open {
+				@apply grid-rows-[1fr] overflow-hidden scale-y-100;
+			}
+
+			&.close {
+				@apply grid-rows-[0fr] h-0 p-0 mb-0 overflow-hidden;
+			}
+
+			h5 {
+				@apply min-h-[2.20rem] mb-5 text-lg font-semibold md:text-lg lg:text-lg;
+			}
+
+			.desc {
+				@apply font-body text-justify mb-6 leading-[1.75rem] font-light text-sm lg:font-body lg:text-justify lg:mb-5 lg:leading-[2rem] lg:font-light lg:text-md;
+			}
+
+			p > a {
+				@apply inline;
+			}
+
+			a {
+				@apply w-full flex justify-center;
+
+				img {
+					@apply m-4 w-[160px] h-[42px];
+				}
+			}
+		}
+
+		fieldset {
+			@apply border-none m-0 p-0;
+		}
+
+		input {
+			@apply border m-0 border-ceramic rounded block py-1 px-2;
+		}
+	}
+}

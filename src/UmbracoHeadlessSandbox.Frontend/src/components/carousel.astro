@@ -1,0 +1,33 @@
+---
+import Heading from "@components/heading.astro";
+import { type CarouselElementModel, type CarouselItemElementModel } from "@scripts/api";
+import CarouselItem from "@components/carouselItem.astro";
+
+interface Props {
+	item: CarouselElementModel;
+}
+
+const { item } = Astro.props;
+---
+
+<section class="py-6">
+	<div class="container mt-9 mb-12">
+		<Heading title={item?.properties?.title} />
+
+		<div class="swiper swiper-carousel" data-js="Carousel">
+			<div class="swiper-wrapper">
+				{
+					item?.properties?.carouselItems?.items?.map((data) => (
+						<CarouselItem item={data?.content as CarouselItemElementModel} />
+					))
+				}
+			</div>
+			<button class="swiper-button-prev">
+				<span class="sr-only">Previous slide</span>
+			</button>
+			<button class="swiper-button-next">
+				<span class="sr-only">Next slide</span>
+			</button>
+		</div>
+	</div>
+</section>

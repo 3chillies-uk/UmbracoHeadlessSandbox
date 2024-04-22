@@ -1,0 +1,29 @@
+@layer components {
+	.news-item {
+		@apply mr-4;
+
+		:last-child {
+			@apply mr-0;
+		}
+
+		h2 {
+			@apply min-h-[1rem] mb-5 text-lg md:min-h-[5rem] md:text-lg lg:min-h-[7rem] lg:text-xl;
+		}
+
+		.desc {
+			@apply font-body text-justify mt-2 mb-6 leading-[1.75rem] font-light text-sm md:font-body md:text-justify md:mt-2 md:mb-5;
+		}
+
+		p > a {
+			@apply inline;
+		}
+
+		a {
+			@apply w-full flex justify-center;
+
+			img {
+				@apply m-4 w-[160px] h-[42px];
+			}
+		}
+	}
+}

@@ -1,0 +1,29 @@
+---
+import { type TextWithImageElementModel } from "@scripts/api";
+import UmbracoMedia from "@components/umbracoMedia.astro";
+import Heading from "@components/heading.astro";
+
+interface Props {
+	item?: TextWithImageElementModel;
+}
+
+const { item } = Astro.props;
+---
+
+<section class="py-6">
+
+	<Heading title={item?.properties?.title} />
+
+	<div class="flex flex-col lg:flex-row gap-4 ">
+				
+		<div class="flex text-justify flex-col w-full lg:w-1/2 richText">
+			<p set:html={item?.properties?.text.markup} />
+		</div>
+
+		<div class="flex justify-center w-full lg:w-1/2 ">
+			<UmbracoMedia items={item?.properties?.image} />
+		</div>
+		
+	</div>
+
+</section>

@@ -1,0 +1,32 @@
+---
+import Heading from "@components/heading.astro";
+
+interface Props {
+	title: string;
+	items: any;
+	cssClass: string;
+}
+
+const { title, items, cssClass } = Astro.props;
+---    
+
+<section class={cssClass + " container mt-9 mb-12"}>
+	<Heading title={title} />
+	<div class="flex flex-col md:flex-row mt-8">
+		{
+			items?.map((data) => (
+				<div class="w-full md:w-1/4 news-item">
+					<h2 class="font-heading text-xl">{data.name}</h2>
+					<p class="desc" set:html={data.description} />
+					{data.image ? (
+						<a href={data.url} target="_blank">
+							<img src={data.image} />
+						</a>
+					) : (
+						""
+					)}
+				</div>
+			))
+		}
+	</div>
+</section>

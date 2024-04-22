@@ -1,0 +1,13 @@
+---
+import { type RichTextElementModel } from "@scripts/api";
+
+interface Props {
+	item?: RichTextElementModel;
+}
+
+const { item } = Astro.props;
+---
+
+<section class="py-6 richText">
+	<p class="desc" set:html={item?.properties?.text.markup} />
+</section>

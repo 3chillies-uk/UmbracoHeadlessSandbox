@@ -1,0 +1,17 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Heading from "@components/heading.astro";
+import Palette from "@components/palette.astro";
+---
+
+<Layout page={null}>
+	<section class="container mt-9 mb-12">
+		<Heading title="Colours" />
+
+		<div class="container">
+			<div class="px-0 flex flex-wrap mx-auto">
+				<Palette />
+			</div>
+		</div>
+	</section>
+</Layout>

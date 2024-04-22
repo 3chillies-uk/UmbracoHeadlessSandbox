@@ -1,0 +1,64 @@
+---
+import Heading from "@components/heading.astro";
+import {
+	type ApiBlockItemModel,
+	type TabbedContentElementModel,
+	type TabbedContentItemElementModel,
+} from "@scripts/api";
+
+interface Props {
+	item?: TabbedContentElementModel;
+}
+
+const { item } = Astro.props;
+
+var activeNavIndex = 0;
+---
+
+<section class="py-">
+	<Heading title={item?.properties?.title} />
+
+	<div class="tabbedContent mt-6" data-js="TabbedContent">
+		<div class="tab-container" role="tablist">
+			{
+				item?.properties?.tabs?.items?.map((data: ApiBlockItemModel, i) => (
+					<button
+						role="tab"
+						aria-selected="false"
+						id={`tab` + i + `-` + data?.content?.id}
+						class={i == activeNavIndex ? "tab active" : "tab"}
+						aria-controls={`tab-panel-` + i + `-` + data?.content?.id}
+					>
+						{data?.content?.properties?.title}
+					</button>
+				))
+			}
+		</div>
+
+		<div class="tab-panel-container">
+			{
+				item?.properties?.tabs?.items?.map((data: ApiBlockItemModel, i) => (
+					<>
+						<div
+							class={i == activeNavIndex ? "tab-small active" : "tab-small"}
+							id={`tab-small` + i + `-` + data?.content?.id}
+							aria-controls={`tab-panel-` + i + `-` + data?.content?.id}
+						>
+							{data?.content?.properties?.title}
+						</div>
+						<div
+							class={i == activeNavIndex ? "tab-panel active richText" : "tab-panel richText"}
+							id={`tab-panel-` + i + `-` + data?.content?.id}
+							aria-labelledby={`tab` + i + `-` + data?.content?.id}
+							role="tabpanel"
+							tabindex={i}
+						>
+							<h3 class="font-bold text-md">{data?.content?.properties?.title}</h3>
+							<p set:html={(data?.content as TabbedContentItemElementModel)?.properties?.text?.markup} />
+						</div>
+					</>
+				))
+			}
+		</div>
+	</div>
+</section>

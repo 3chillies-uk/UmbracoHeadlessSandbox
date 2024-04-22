@@ -1,0 +1,83 @@
+@layer base {
+	:root {
+		@apply scroll-smooth font-light;
+	}
+	body {
+		@apply bg-white border-umbracoblue mt-0 mb-0 border-solid border-t-4;
+	}
+	h1 {
+		@apply text-black;
+	}
+	h2 {
+		@apply text-black text-2xl;
+	}
+	h3 {
+		@apply text-black;
+	}
+	a {
+		@apply underline text-umbracoorange;
+	}
+
+	main {
+		@apply bg-white text-black min-h-svh;
+	}
+}
+
+@layer components {
+	.skip-to-main-content-link {
+		@apply absolute left-[-9999px] z-[999] p-1 bg-black text-white opacity-0;
+	}
+
+	.skip-to-main-content-link:focus {
+		@apply left-[50%] translate-x-[-50%] opacity-100;
+	}
+	.linkButton {
+		@apply border py-2 px-8 text-black hover:bg-umbracoorange hover:text-white uppercase font-bold text-xs no-underline;
+	}
+
+	.richText {
+		@apply text-charcoal text-sm font-light font-body;
+
+		p {
+			@apply block mb-4;
+		}
+		ul,
+		ol {
+			@apply list-disc list-outside ml-10;
+
+			li {
+				@apply mb-2;
+			}
+		}
+
+		ol {
+			@apply list-decimal;
+		}
+
+		.embeditem {
+			@apply flex flex-row justify-center;
+
+			iframe,
+			object,
+			embed {
+				@apply aspect-video w-full h-[300px] sm:h-[450px] md:h-[600px] lg:h-[450px] xl:h-[600px];
+			}
+		}
+
+		p > a {
+			@apply inline;
+		}
+		
+
+		a {
+			@apply w-full flex justify-center;
+
+			img {
+				@apply m-4 w-[160px] h-[42px];
+			}
+		}
+	}
+}
+
+@layer utilities {
+}
