@@ -475,6 +475,10 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/umbraco,astro,visualstudiocode,visualstudio
 
 !**/umbraco/data/*.sqlite.db
+!**/umbraco/data
+!**/umbraco/
+**/umbraco/Logs
+**/umbraco/data/temp
 **/.vercel/
 **/.yarn/
 **/dist/
